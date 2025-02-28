@@ -4,14 +4,16 @@
 
 
 Basically a Tutorial on how to save and load data which:
-	1. is nested in a custom Array[CustomClass]
-	2. is supposed to be in a single .json
+
+1. is nested in a custom Array[CustomClass]
+2. is supposed to be in a single .json
 
 
 
 **[1] "Why would I need that?"**
 
 In case you are only looking for a solution to save simple data, please refer to [this post](https://forum.godotengine.org/t/how-to-load-and-save-things-with-godot-a-complete-tutorial-about-serialization/44515), which explains everything much better. Some passages are actually copied from there. Unfortunately the part about nested data is missing.
+
 
 
 **[2] "Aren't Resources capable of saving nested Resources?"**
@@ -24,6 +26,7 @@ Furthermore - at least to me - it seems easier to debug .json's, especially in c
 **Once the bug with the Resources is fixed I would (probably) recommend switching to that method.**
 
 
+
 **[3] "What are good use-cases?"**
 
 Inventories.
@@ -31,24 +34,29 @@ Inventories.
 Anything where you need a .json, most likely to transfer data to other apps. [Check this for more information.](https://forum.godotengine.org/t/how-to-load-and-save-things-with-godot-a-complete-tutorial-about-serialization/44515)
 
 
+
 **[4] "What is a .json?"**
 
 [Please read this.](https://forum.godotengine.org/t/how-to-load-and-save-things-with-godot-a-complete-tutorial-about-serialization/44515)
+
+
 
 
 # tl;dr
 The trick is to save a dictionary in a dictionary in a dictionary to achieve the following structure:
 
 
+
+
 # Overview
 
 Imagine you got the following data_structure of an inventory:
 	
-- Inventory
+Inventory
 
--- Array[Item]
+	Array[Item]
 
---- Array[SubData]
+		Array[SubData]
 
 
 **Inventory**:
