@@ -4,9 +4,11 @@ extends Node
 @export var fill_amount : int = 3
 
 var items : Array[Item]
+## Why is an ITEM_ID necessary? In theory it isn't. In this case it just makes it easier to fetch it from a Dictionary when loading. Furthermore it helps the structure. Be careful in case you use a shared-id amongst Items which may exist several times in your inventory!
 const ITEM_ID := "ITEM_ID."
 const ITEMS_SIZE := "ITEMS_SIZE"
 
+## MORE_INFO: https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html
 var save_path : String = "user://inventory.json"
 
 
@@ -30,13 +32,14 @@ func clear_inventory() -> void:
 
 
 func save_inventory() -> void:
+	## COPED from https://forum.godotengine.org/t/how-to-load-and-save-things-with-godot-a-complete-tutorial-about-serialization/44515
 	var saved_dict : Dictionary = {ITEMS_SIZE: items.size()}
 	var fetched_dict : Dictionary
 	for count in range(0, items.size()):
 		fetched_dict = items[count].get_save_dict()
 		saved_dict[_get_item_count_id(count)] = fetched_dict
 	
-	var json_data = JSON.stringify(saved_dict, "\t")
+	var json_data = JSON.stringify(saved_dict, "\t")	## the "\t" ensures that the JSON ends up being human-readable
 	
 	var file_access := FileAccess.open(save_path, FileAccess.WRITE)
 	if not file_access:
@@ -55,7 +58,7 @@ func load_inventory() -> void:
 		return
 	
 	var file_access := FileAccess.open(save_path, FileAccess.READ)
-	var json_string := file_access.get_as_text()
+	var json_string := file_access.get_as_text()	## in the original one here is written get_line(), which will only fetch the first line. We do not want that, instead the whole text!
 	file_access.close()
 	
 	var json := JSON.new()
@@ -68,7 +71,9 @@ func load_inventory() -> void:
 	var data : Dictionary = json.data
 	var new_item : Item
 	for count in range(0, data[ITEMS_SIZE]):
+		## Create a new ITEM. After all it does not exist right now! In case you are using Resources, this is basically the same
 		new_item = Item.new()
+		## The important part: ensure that the class got a function which allows you to read out the data. Furthermore: only send the necessary data, in this case the data from the specific ID.
 		new_item.read_save_dict(data[_get_item_count_id(count)])
 		items.append(new_item)
 	
