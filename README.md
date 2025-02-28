@@ -1,4 +1,4 @@
-# Godot-Nested-JSON
+# Godot-Nested-JSON - "Tutorial"
 
 # What's this?
 
@@ -23,7 +23,7 @@ Yes.
 But as of right now (February 2025) there is a bug, which can be solved with [workarounds](https://github.com/godotengine/godot/issues/65393), but is annoying regardless.
 Furthermore - at least to me - it seems easier to debug .json's, especially in case you want to have consistent save-files which hopefully do not break with your next update, which is probably wrong!
 
-**Once the bug with the Resources is fixed I would (probably) recommend switching to that method.**
+*Once the bug with the Resources is fixed I would (probably) recommend switching to that method.*
 
 
 
@@ -40,23 +40,19 @@ Anything where you need a .json, most likely to transfer data to other apps. [Ch
 [Please read this.](https://forum.godotengine.org/t/how-to-load-and-save-things-with-godot-a-complete-tutorial-about-serialization/44515)
 
 
-
-
 # tl;dr
 The trick is to save a dictionary in a dictionary in a dictionary to achieve the following structure:
-
-
 
 
 # Overview
 
 Imagine you got the following data_structure of an inventory:
 	
-Inventory
+	Inventory
 
-	Array[Item]
+		Array[Item]
 
-		Array[SubData]
+			Array[SubData]
 
 
 **Inventory**:
