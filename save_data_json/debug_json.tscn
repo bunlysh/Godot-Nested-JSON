@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://yov35erxsi40"]
+
+[ext_resource type="Script" path="res://save_data_json/inventory.gd" id="1_03fgn"]
+
+[node name="DebugJson" type="CanvasLayer"]
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("1_03fgn")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 197.0
+grow_horizontal = 2
+
+[node name="Info" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Info:
+1. Press \"FILL\" to push random Data into the inventory.
+2. \"DUMP_INVENTORY\" drops everything into the Console.
+3. Hit \"SAVE\" to save the data in the current array.
+4. With \"OPEN_FOLDER\" you can open the file_path to where the data is saved. Open inventory.json with the TextEditor of your choice.
+4. \"CLEAR\" clears the current data in the ARRAY, NOT the save-file! Use this before LOADING!
+5. \"LOAD\" loads."
+
+[node name="ButtonsDebug" type="VBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 299.0
+offset_bottom = 400.0
+grow_horizontal = 2
+metadata/_edit_group_ = true
+
+[node name="BTDump" type="Button" parent="ButtonsDebug"]
+layout_mode = 2
+text = "DUMP_INVENTORY"
+
+[node name="BTFill" type="Button" parent="ButtonsDebug"]
+layout_mode = 2
+text = "FILL"
+
+[node name="BTClear" type="Button" parent="ButtonsDebug"]
+layout_mode = 2
+text = "CLEAR"
+
+[node name="ButtonsSave" type="VBoxContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 143.5
+offset_bottom = 244.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="BTSave" type="Button" parent="ButtonsSave"]
+layout_mode = 2
+text = "SAVE"
+
+[node name="BTLoad" type="Button" parent="ButtonsSave"]
+layout_mode = 2
+text = "LOAD"
+
+[node name="BTOpenFolder" type="Button" parent="ButtonsSave"]
+layout_mode = 2
+text = "OPEN_FOLDER"
+
+[connection signal="pressed" from="ButtonsDebug/BTDump" to="Inventory" method="d_debug"]
+[connection signal="pressed" from="ButtonsDebug/BTFill" to="Inventory" method="fill_inventory"]
+[connection signal="pressed" from="ButtonsDebug/BTClear" to="Inventory" method="clear_inventory"]
+[connection signal="pressed" from="ButtonsSave/BTSave" to="Inventory" method="save_inventory"]
+[connection signal="pressed" from="ButtonsSave/BTLoad" to="Inventory" method="load_inventory"]
+[connection signal="pressed" from="ButtonsSave/BTOpenFolder" to="Inventory" method="open_save_location"]
