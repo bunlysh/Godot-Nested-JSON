@@ -29,27 +29,30 @@ Anything where you need a .json, most likely to transfer data to other apps. [Ch
 
 # tl;dr
 The trick is to save a dictionary in a dictionary in a dictionary to achieve the following structure:
-> {
->	"ITEM_0": {
->		"ITEM_NAME": "Item0",
->		"SUB_DATA": {
->			"SUB_DATA_0": {
-				[*DATA*]
->			},
->			[*MORE_DATA*]
->		}
->	},
->	"ITEM_1": {
->		[*same structure as ITEM_0, but different data*]
->	},
->	[*MORE_DATA*]
->}
+' {
+	"ITEM_0": {
+		"ITEM_NAME": "Item0",
+		"SUB_DATA": {
+			"SUB_DATA_0": {
+			[*DATA*]
+			},
+			[*MORE_DATA*]
+		}
+	},
+	"ITEM_1": {
+		[*same structure as ITEM_0, but different data*]
+	},
+	[*MORE_DATA*]
+}'
 
 
 # Overview
 Imagine you got the following data_structure of an inventory:
+	
 > class Inventory
+
 > 	Array[Item]
+
 >		Array[SubData]
 
 **Inventory**:
